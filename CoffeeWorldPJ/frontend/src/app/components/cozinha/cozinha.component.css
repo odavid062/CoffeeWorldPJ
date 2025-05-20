@@ -1,0 +1,98 @@
+/* Estilização geral para o body */
+.body {
+  background-color:  rgba(195, 153, 105, 0.8);;
+  min-height: 100vh;
+  padding: 1rem;
+  color: white;
+}
+
+/* Ajustando as bordas e os espaçamentos dos cards */
+.card {
+  border-radius: 8px;
+  border: none;
+}
+
+.card-header {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.pendente {
+  background-color: rgb(220, 0, 0);
+}
+.preparo {
+  background-color: rgb(255, 200, 0);
+}
+.finalizado {
+  background-color: rgb(0, 200, 0);
+}
+
+.card-body {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Botões */
+.btn {
+  margin-top: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #3b8c9a;
+  border-color: #3b8c9a;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+/* Adicionando um efeito sutil nos botões ao passar o mouse */
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Estilo para o título */
+h1,
+.card-title {
+  color: #fff;
+}
+
+.text {
+  font-size: 20px;
+}
+/* Tabelas e células */
+.table {
+  color: #333;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.table-responsive {
+  margin: 1rem 0;
+}
+
+.table-sm th,
+.table-sm td {
+  font-size: 0.9rem;
+}
+
+.table th {
+  background-color: #f0f0f0;
+}
+
+.card-body p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.table-responsive table {
+  width: 100%;
+}

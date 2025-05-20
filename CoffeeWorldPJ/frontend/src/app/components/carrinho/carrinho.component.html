@@ -1,0 +1,104 @@
+<div class="body">
+  <div class="container mt-4 position-relative">
+    <!-- Seta no canto superior esquerdo -->
+    <a
+      routerLink="/cardapio"
+      class="btn btn-link position-absolute top-0 start-0 m-4 p-2"
+    >
+      <i class="bi bi-arrow-left fs-3 text-dark fw-bold"></i>
+    </a>
+
+    <!-- Título centralizado normalmente -->
+    <h1 class="text-center mb-4">Carrinho de Compras</h1>
+
+    <div *ngIf="itens.length === 0" class="text-center mt-4">
+      <div class="alert alert-info">Seu Carrinho está vazio</div>
+      <a routerLink="/cardapio" class="btn-voltar mt-4">
+        <i class="bi bi-arrow-left me-2"></i>Voltar ao Cardápio
+      </a>
+    </div>
+
+    <div *ngIf="itens.length > 0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+              <th>Subtotal</th>
+              <th class="bi bi-trash"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of itens">
+              <td>
+                <div class="d-flex align-items-center">
+                  <img
+                    [src]="item.produto.imagemUrl"
+                    [alt]="item.produto.nome"
+                    class="me-3"
+                    style="width: 50px; height: 50px; object-fit: cover"
+                  />
+                  <div>
+                    <h6 class="mb-0" style="font-size: 22px">
+                      {{ item.produto.nome }}
+                    </h6>
+                    <small class="text-muted">{{
+                      item.produto.descricao
+                    }}</small>
+                  </div>
+                </div>
+              </td>
+              <td>R$ {{ item.produto.preco | number : "1.2-2" }}</td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <button
+                    class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                    style="width: 32px; height: 32px"
+                    (click)="diminuirQuantidade(item)"
+                  >
+                    <i class="bi bi-dash"></i>
+                  </button>
+                  <span class="quantidade-item mx-2">{{
+                    item.quantidade
+                  }}</span>
+                  <button
+                    class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                    style="width: 32px; height: 32px"
+                    (click)="aumentarQuantidade(item)"
+                  >
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+              </td>
+              <td>
+                R$ {{ item.produto.preco * item.quantidade | number : "1.2-2" }}
+              </td>
+              <td>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="removerItem(item.produto.id)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-end mt-4">
+        <button class="btn btn-outline-danger" (click)="limparCarrinho()">
+          <i class="bi bi-trash me-2"></i>Limpar Carrinho
+        </button>
+        <div class="text-end">
+          <h4>Total: R$ {{ total | number : "1.2-2" }}</h4>
+          <button class="btn btn-success" (click)="finalizarPedido()">
+            <i class="bi bi-check-lg me-2"></i>Finalizar Pedido
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

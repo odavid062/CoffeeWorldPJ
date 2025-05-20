@@ -1,0 +1,290 @@
+<div class="body">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="../../../assets/logo.png" alt="Coffee World" />
+      </a>
+      <form class="d-flex ms-auto">
+        <input
+          class="form-control me-1"
+          type="search"
+          placeholder="Pesquisar produto"
+          aria-label="Pesquisar"
+        />
+        <button class="pesquisar" type="submit">
+          <img src="assets/lupa.png" alt="lupa de pesquisa" />
+        </button>
+        <button
+          class="btn btn-primary d-flex align-items-center"
+          routerLink="/cozinha"
+        >
+          <i class="bi bi-cup-straw me-2"></i>Cozinha
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero position-relative">
+    <div class="overlay"></div>
+    <div class="hero-content position-relative text-center">
+      <h1>Escolha uma categoria</h1>
+      <div class="dropdown mt-3">
+        <button
+          class="btn btn-light dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+        >
+          SELECIONE AQUI
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#quentes">Bebidas quentes</a></li>
+          <li><a class="dropdown-item" href="#geladas">Bebidas geladas</a></li>
+          <li><a class="dropdown-item" href="#lanches">Lanches</a></li>
+          <li><a class="dropdown-item" href="#sobremesas">Sobremesas</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrinho -->
+  <section class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title mb-0" style="padding-top: 20px">Cardápio</h2>
+      <button
+        class="btn btn-primary d-flex align-items-center"
+        routerLink="/carrinho"
+      >
+        <i class="bi bi-cart me-2"></i>Carrinho
+      </button>
+    </div>
+
+
+
+    <div class="divider1"></div>
+
+    <div
+      *ngIf="mensagemSucesso"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      {{ mensagemSucesso }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+  </section>
+
+  <!-- Bebidas Quentes -->
+  <section class="container mt-5" id="quentes">
+    <h2 class="section-title mb-4">Bebidas Quentes</h2>
+    <div class="row">
+      <div
+        class="col-12 col-md-6 col-lg-4 mb-4"
+        *ngFor="let produto of bebidasQuentes"
+      >
+        <div class="card h-100">
+          <img
+            [src]="produto.imagemUrl"
+            [alt]="produto.nome"
+            class="card-img-top"
+            style="height: 200px; object-fit: cover"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ produto.nome }}</h5>
+            <p class="card-text">{{ produto.descricao }}</p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Tempo de preparo: {{ produto.tempoPreparoMinutos }} min</small
+              >
+            </p>
+          </div>
+          <div
+            class="card-footer d-flex justify-content-between align-items-center"
+          >
+            <span class="h5 mb-0"
+              >R$ {{ produto.preco | number : "1.2-2" }}</span
+            >
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                [routerLink]="['/produto', produto.id]"
+              >
+                <i class="bi bi-eye me-2"></i>Ver Detalhes
+              </button>
+              <button
+                class="btn btn-primary"
+                (click)="adicionarAoCarrinho(produto)"
+              >
+                <i class="bi bi-cart-plus me-2"></i>Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bebidas Geladas -->
+  <section class="container mt-5" id="geladas">
+    <div class="divider"></div>
+    <h2 class="section-title mb-4">Bebidas Geladas</h2>
+    <div class="row">
+      <div
+        class="col-12 col-md-6 col-lg-4 mb-4"
+        *ngFor="let produto of bebidasGeladas"
+      >
+        <div class="card h-100">
+          <img
+            [src]="produto.imagemUrl"
+            [alt]="produto.nome"
+            class="card-img-top"
+            style="height: 200px; object-fit: cover"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ produto.nome }}</h5>
+            <p class="card-text">{{ produto.descricao }}</p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Tempo de preparo: {{ produto.tempoPreparoMinutos }} min</small
+              >
+            </p>
+          </div>
+          <div
+            class="card-footer d-flex justify-content-between align-items-center"
+          >
+            <span class="h5 mb-0"
+              >R$ {{ produto.preco | number : "1.2-2" }}</span
+            >
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                [routerLink]="['/produto', produto.id]"
+              >
+                <i class="bi bi-eye me-2"></i>Ver Detalhes
+              </button>
+              <button
+                class="btn btn-primary"
+                (click)="adicionarAoCarrinho(produto)"
+              >
+                <i class="bi bi-cart-plus me-2"></i>Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lanches -->
+  <section class="container mt-5" id="lanches">
+    <div class="divider"></div>
+    <h2 class="section-title mb-4">Lanches</h2>
+    <div class="row">
+      <div
+        class="col-12 col-md-6 col-lg-4 mb-4"
+        *ngFor="let produto of lanches"
+      >
+        <div class="card h-100">
+          <img
+            [src]="produto.imagemUrl"
+            [alt]="produto.nome"
+            class="card-img-top"
+            style="height: 200px; object-fit: cover"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ produto.nome }}</h5>
+            <p class="card-text">{{ produto.descricao }}</p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Tempo de preparo: {{ produto.tempoPreparoMinutos }} min</small
+              >
+            </p>
+          </div>
+          <div
+            class="card-footer d-flex justify-content-between align-items-center"
+          >
+            <span class="h5 mb-0"
+              >R$ {{ produto.preco | number : "1.2-2" }}</span
+            >
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                [routerLink]="['/produto', produto.id]"
+              >
+                <i class="bi bi-eye me-2"></i>Ver Detalhes
+              </button>
+              <button
+                class="btn btn-primary"
+                (click)="adicionarAoCarrinho(produto)"
+              >
+                <i class="bi bi-cart-plus me-2"></i>Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobremesas -->
+
+  <section class="container mt-5" id="sobremesas">
+    <div class="divider"></div>
+    <h2 class="section-title mb-4">Sobremesas</h2>
+    <div class="row">
+      <div
+        class="col-12 col-md-6 col-lg-4 mb-4"
+        *ngFor="let produto of sobremesas"
+      >
+        <div class="card h-100">
+          <img
+            [src]="produto.imagemUrl"
+            [alt]="produto.nome"
+            class="card-img-top"
+            style="height: 200px; object-fit: cover"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ produto.nome }}</h5>
+            <p class="card-text">{{ produto.descricao }}</p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Tempo de preparo: {{ produto.tempoPreparoMinutos }} min</small
+              >
+            </p>
+          </div>
+          <div
+            class="card-footer d-flex justify-content-between align-items-center"
+          >
+            <span class="h5 mb-0"
+              >R$ {{ produto.preco | number : "1.2-2" }}</span
+            >
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                [routerLink]="['/produto', produto.id]"
+              >
+                <i class="bi bi-eye me-2"></i>Ver Detalhes
+              </button>
+              <button
+                class="btn btn-primary"
+                (click)="adicionarAoCarrinho(produto)"
+              >
+                <i class="bi bi-cart-plus me-2"></i>Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer text-center mt-5 p-3 text-white">
+    © 2025 Coffee World - Todos os direitos reservados
+  </div>
+</div>

@@ -1,0 +1,133 @@
+<div class="body">
+  <div class="container-fluid mt-4">
+    <h1 class="text-center mb-4">Painel da Cozinha</h1>
+
+    <div class="row">
+      <!-- Pedidos Pendentes -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header pendente">
+            <h3 class="card-title mb-0">Pedidos Pendentes</h3>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let pedido of pedidosPendentes" class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Pedido #{{ pedido.id }}</h5>
+                <p class="card-text">
+                  <strong class="text">Cliente:</strong> {{ pedido.cpfCliente
+                  }}<br />
+                  <strong class="text">Tempo Estimado:</strong>
+                  {{ calcularTempoPreparo(pedido) }} minutos
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of pedido.itens">
+                        <td>{{ produtos[item.produtoId].nome }}</td>
+                        <td>{{ item.quantidade }}x</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <button
+                  class="btn preparo text-white w-100"
+                  (click)="iniciarPreparo(pedido)"
+                >
+                  <i class="bi bi-play-fill me-2"></i>Iniciar Preparo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pedidos em Preparo -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header preparo text-white">
+            <h3 class="card-title mb-0">Em Preparo</h3>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let pedido of pedidosEmPreparo" class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Pedido #{{ pedido.id }}</h5>
+                <p class="card-text">
+                  <strong class="text">Cliente:</strong> {{ pedido.cpfCliente
+                  }}<br />
+                  <strong class="text">Tempo Estimado:</strong>
+                  {{ calcularTempoPreparo(pedido) }} minutos
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of pedido.itens">
+                        <td>{{ produtos[item.produtoId].nome }}</td>
+                        <td>{{ item.quantidade }}x</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <button
+                  class="btn finalizado text-white w-100"
+                  (click)="finalizarPedido(pedido)"
+                >
+                  <i class="bi bi-check-lg me-2"></i>Finalizar Pedido
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pedidos Finalizados -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header finalizado text-white">
+            <h3 class="card-title mb-0">Finalizados</h3>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let pedido of pedidosFinalizados" class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Pedido #{{ pedido.id }}</h5>
+                <p class="card-text">
+                  <strong class="text">Cliente:</strong> {{ pedido.cpfCliente
+                  }}<br />
+                  <strong class="text">Finalizado em:</strong>
+                  {{ pedido.dataHoraPedido | date : "dd/MM/yyyy HH:mm" }}
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of pedido.itens">
+                        <td>{{ produtos[item.produtoId].nome }}</td>
+                        <td>{{ item.quantidade }}x</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

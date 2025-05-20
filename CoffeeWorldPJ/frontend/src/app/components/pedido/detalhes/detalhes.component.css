@@ -1,0 +1,223 @@
+.body {
+  background-color: rgba(195, 153, 105, 0.8);
+  color: #4a1f0e;
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.card {
+  border: none;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.card-header {
+  background-color: #4a1f0e;
+  color: white;
+  border-bottom: none;
+  padding: 1rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-title {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+  background-color: white;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.cancelar {
+  background-color: red;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.5s ease, transform 0.9s ease;
+}
+
+.cancelar:hover {
+  background-color: rgb(220, 0, 0);
+  color: white;
+  font-weight: 700;
+}
+
+.confirm-cancelar {
+  background-color: rgb(255, 255, 255);
+  color: rgb(255, 0, 0);
+  border: 1px solid red;
+  font-weight: 600;
+  transition: background-color 0.5s ease, transform 0.9s ease;
+}
+
+.confirm-cancelar:hover {
+  background-color: rgb(220, 0, 0);
+  color: white;
+  font-weight: 700;
+}
+
+.btn-cancelar-cancelamento {
+  background-color: rgb(200, 200, 200);
+  border: 1px solid gray;
+  font-weight: 600;
+  transition: background-color 0.5s ease, transform 0.9s ease;
+}
+.btn-cancelar-cancelamento:hover {
+  background-color: rgb(180, 180, 180);
+  font-weight: 700;
+  transition: background-color 0.9s ease;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #4a1f0e;
+}
+
+.form-control,
+.form-select {
+  border-radius: 12px;
+  border: 1px solid #4a1f0e;
+}
+
+.table th {
+  background-color: #4a1f0e;
+  color: white;
+  border: none;
+}
+
+.x {
+  border-radius: 12px 0 0 0;
+}
+
+.y {
+  border-radius: 0 12px 0 0;
+}
+.table td {
+  vertical-align: middle;
+  color: #4a1f0e;
+}
+
+.table thead {
+  border-radius: 12px;
+}
+
+.table-responsive {
+  margin: 1rem 0;
+}
+
+.alert {
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.alert-warning {
+  background-color: #ffecb3;
+  color: #856404;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.alert-heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+h5 {
+  color: #4a1f0e;
+  font-weight: bold;
+}
+
+/* Estilo de Botões */
+.btn-finalizar {
+  border: 2px solid #ff0000;
+  background-color: #4a1f0e;
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  background-color: #3c1e12;
+  border-color: #3c1e12;
+}
+
+.btn-adicionar {
+  border: 2px solid #4a1f0e;
+  background-color: white;
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: #4a1f0e;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-adicionar:hover {
+  background-color: #4a1f0e;
+  color: white;
+}
+
+.btn-link i {
+  color: white !important;
+  transition: 0.3s;
+}
+
+.btn-link:hover i {
+  color: #c39969 !important;
+}
+
+.btn-primary {
+  background-color: #4a1f0e;
+  border-color: #4a1f0e;
+}
+
+.btn-primary:hover {
+  background-color: #3c1e12;
+  border-color: #3c1e12;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+.d-flex.justify-content-between {
+  margin-top: 1rem;
+}
+
+.d-flex.justify-content-end {
+  margin-top: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+table th,
+table td {
+  padding: 10px;
+}

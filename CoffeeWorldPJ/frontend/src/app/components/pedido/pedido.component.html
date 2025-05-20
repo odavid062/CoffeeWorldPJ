@@ -1,0 +1,100 @@
+<div class="body">
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <button
+          class="btn btn-link p-0 me-3"
+          [routerLink]="['/carrinho']"
+          title="Voltar para Carrinho"
+        >
+          <i class="bi bi-arrow-left fs-4 text-black"></i>
+        </button>
+        <h3 class="card-title mb-0">Finalizar Pedido</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <label for="cpf" class="form-label">CPF</label>
+            <input
+              id="cpf"
+              type="text"
+              class="form-control"
+              [(ngModel)]="pedido.cpfCliente"
+            />
+          </div>
+
+          <div class="col-12 mb-3">
+            <label for="formaPagamento" class="form-label"
+              >Forma de Pagamento</label
+            >
+            <select
+              id="formaPagamento"
+              class="form-select"
+              [(ngModel)]="pedido.formaPagamento"
+            >
+              <option value="">Selecione a forma de pagamento</option>
+              <option
+                *ngFor="let forma of formasPagamento"
+                [value]="forma.value"
+              >
+                {{ forma.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-12 mb-3">
+            <h5 class="mb-3">Itens do Pedido</h5>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="x">Quantidade</th>
+                    <th>Produto</th>
+                    <th>Preço Unitário</th>
+                    <th class="y">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of itensComProduto">
+                    <td>{{ item.quantidade }}x</td>
+                    <td>{{ item.produto.nome }}</td>
+                    <td>R$ {{ item.produto.preco | number : "1.2-2" }}</td>
+                    <td>
+                      R$
+                      {{
+                        item.produto.preco * item.quantidade | number : "1.2-2"
+                      }}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" class="text-end fw-bold">Total:</td>
+                    <td class="fw-bold">
+                      R$ {{ pedido.valorTotal | number : "1.2-2" }}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end">
+              <button class="btn-adicionar me-2" [routerLink]="['/cardapio']">
+                <i class="bi bi-cup-hot me-2"></i>Adicionar Mais Produtos
+              </button>
+              <button
+                class="btn-finalizar"
+                (click)="finalizarPedido()"
+                [disabled]="!pedido.cpfCliente || !pedido.formaPagamento"
+              >
+                <i class="bi bi-check-lg me-2"></i>Finalizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

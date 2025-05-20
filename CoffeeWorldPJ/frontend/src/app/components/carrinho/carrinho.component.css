@@ -1,0 +1,123 @@
+.body {
+  background-color: rgba(195, 153, 105, 0.8);
+  min-height: 100vh;
+  padding: 1rem;
+  color: white;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  color: #4a1f0e;
+  font-weight: bold;
+}
+
+.btn-voltar {
+  background-color: #4a1f0e;
+  border-radius: 8px;
+  padding: 7px 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.alert-info {
+  background-color: #f5f0ec;
+  color: #4a1f0e;
+  border: 1px solid #c39969;
+  border-radius: 10px;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+th {
+  background-color: #4a1f0e;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+td:first-child {
+  text-align: left;
+}
+
+td img {
+  border-radius: 10px;
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.quantidade-item {
+  font-weight: 450;
+  font-size: 18px;
+}
+
+.btn-outline-secondary {
+  border-color: #4a1f0e;
+  color: #4a1f0e;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #4a1f0e;
+  color: white;
+}
+
+.btn-outline-danger {
+  border-color: #4a1f0e;
+  color: #4a1f0e;
+}
+
+.btn-outline-danger:hover {
+  background-color: #4a1f0e;
+  color: white;
+}
+
+.btn-outline-primary {
+  border-color: #4a1f0e;
+  color: #4a1f0e;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4a1f0e;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #4a1f0e;
+  border-color: #4a1f0e;
+}
+
+.btn-danger:hover {
+  background-color: #ff2200;
+  border-color: #ff2200;
+}
+
+.btn-success {
+  background-color: #4a1f0e;
+  border-color: #4a1f0e;
+}
+
+.btn-success:hover {
+  background-color: #4a1f0e;
+  border-color: #4a1f0e;
+}
+
+h4 {
+  color: #4a1f0e;
+}

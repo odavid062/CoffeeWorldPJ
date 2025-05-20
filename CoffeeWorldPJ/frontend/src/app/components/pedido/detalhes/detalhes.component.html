@@ -1,0 +1,189 @@
+<div class="body">
+  <div class="container mt-4">
+    <div *ngIf="pedido" class="card">
+      <div class="card-header">
+        <h3 class="card-title mb-0">Detalhes do Pedido #{{ pedido.id }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div
+              class="alert"
+              [ngClass]="{
+                'alert-warning': pedido.status === 'PENDENTE',
+                'alert-info': pedido.status === 'EM_PREPARO',
+                'alert-success': pedido.status === 'FINALIZADO',
+                'alert-danger': pedido.status === 'CANCELADO'
+              }"
+            >
+              <h4 class="alert-heading">Status: {{ pedido.status }}</h4>
+              <p class="mb-0" *ngIf="pedido.previsaoEntrega">
+                Previsão de entrega:
+                {{ pedido.previsaoEntrega | date : "dd/MM/yyyy HH:mm" }}
+              </p>
+              <p class="mb-0" *ngIf="pedido.motivoCancelamento">
+                Motivo do cancelamento: {{ pedido.motivoCancelamento }}
+              </p>
+            </div>
+          </div>
+
+          <div class="col-12 mb-4">
+            <h4>Itens do Pedido</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="x">Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th class="y">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of pedido.itens">
+                    <tr *ngIf="produtos[item.produtoId]">
+                      <td>{{ produtos[item.produtoId].nome }}</td>
+                      <td>{{ item.quantidade }}x</td>
+                      <td>
+                        R$
+                        {{ produtos[item.produtoId].preco | number : "1.2-2" }}
+                      </td>
+                      <td>
+                        R$
+                        {{
+                          produtos[item.produtoId].preco * item.quantidade
+                            | number : "1.2-2"
+                        }}
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" class="text-end fw-bold">Total:</td>
+                    <td class="fw-bold">
+                      R$ {{ pedido.valorTotal | number : "1.2-2" }}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-12 mb-4" *ngIf="podeAvaliar()">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title mb-0">Avaliar Pedido</h4>
+              </div>
+              <div class="card-body">
+                <form
+                  *ngIf="!mostrarFormularioAvaliacao"
+                  (ngSubmit)="mostrarFormularioAvaliacao = true"
+                >
+                  <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-star me-2"></i>Avaliar Pedido
+                  </button>
+                </form>
+
+                <form
+                  *ngIf="mostrarFormularioAvaliacao"
+                  (ngSubmit)="avaliarPedido()"
+                >
+                  <div class="mb-3">
+                    <label class="form-label">Nota</label>
+                    <select
+                      class="form-select"
+                      [(ngModel)]="avaliacao.nota"
+                      name="nota"
+                    >
+                      <option value="1">1 - Péssimo</option>
+                      <option value="2">2 - Ruim</option>
+                      <option value="3">3 - Regular</option>
+                      <option value="4">4 - Bom</option>
+                      <option value="5">5 - Excelente</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Comentário (opcional)</label>
+                    <textarea
+                      class="form-control"
+                      [(ngModel)]="avaliacao.comentario"
+                      name="comentario"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check-lg me-2"></i>Enviar Avaliação
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      (click)="mostrarFormularioAvaliacao = false"
+                    >
+                      <i class="bi bi-x-lg me-2"></i>Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 mb-4" *ngIf="podeCancelar()">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title mb-0">Cancelar Pedido</h4>
+              </div>
+              <div class="card-body">
+                <form
+                  *ngIf="!mostrarFormularioCancelamento"
+                  (ngSubmit)="mostrarFormularioCancelamento = true"
+                >
+                  <button type="submit" class="btn cancelar">
+                    <i class="bi bi-x-circle me-2"></i>Cancelar Pedido
+                  </button>
+                </form>
+
+                <form
+                  *ngIf="mostrarFormularioCancelamento"
+                  (ngSubmit)="cancelarPedido()"
+                >
+                  <div class="mb-3">
+                    <label class="form-label">Motivo do Cancelamento</label>
+                    <textarea
+                      class="form-control"
+                      [(ngModel)]="motivoCancelamento"
+                      name="motivo"
+                      rows="3"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button type="submit" class="btn confirm-cancelar">
+                      <i class="bi bi-check-lg me-2"></i>Confirmar Cancelamento
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-cancelar-cancelamento"
+                      (click)="mostrarFormularioCancelamento = false"
+                    >
+                      <i class="bi bi-x-lg me-2"></i>Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary" routerLink="/cardapio">
+                <i class="bi bi-cup-hot me-2"></i>Fazer Novo Pedido
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

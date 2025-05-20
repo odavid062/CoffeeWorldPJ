@@ -1,0 +1,113 @@
+.body {
+  background-color: rgba(195, 153, 105, 0.8);
+  color: #4a1f0e;
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+
+.card {
+  border: none;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+}
+
+.card-header {
+  background-color: #4a1f0e;
+  color: white;
+  border-bottom: none;
+  padding: 1rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-title {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+  background-color: white;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.x {
+  border-radius: 12px 0 0 0;
+}
+
+.y {
+  border-radius: 0 12px 0 0;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #4a1f0e;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #4a1f0e;
+}
+
+.table th {
+  background-color: #4a1f0e;
+  color: white;
+  border: none;
+}
+
+.table td {
+  vertical-align: middle;
+  color: #4a1f0e;
+}
+
+.table thead {
+  border-radius: 8px;
+}
+
+.btn-finalizar {
+  border: 2px solid #4a1f0e;
+  background-color: #4a1f0e;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  background-color: #3c1e12;
+  border-color: #3c1e12;
+}
+
+.btn-adicionar {
+  border: 2px solid #4a1f0e;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: #4a1f0e;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-adicionar:hover {
+  background-color: #4a1f0e;
+  color: white;
+}
+
+.btn-link i {
+  color: white !important;
+  transition: 0.3s;
+}
+
+.btn-link:hover i {
+  color: #c39969 !important;
+}
+
+h5 {
+  color: #4a1f0e;
+  font-weight: bold;
+}

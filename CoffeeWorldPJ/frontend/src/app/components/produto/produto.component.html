@@ -1,0 +1,55 @@
+<div class="body" *ngIf="produto">
+  <div class="produto-content">
+    <!-- Imagem -->
+    <div class="produto-imagem">
+      <img
+        [src]="produto.imagemUrl"
+        [alt]="produto.nome"
+        class="img-fluid rounded-start"
+      />
+    </div>
+
+    <!-- Informações -->
+    <div class="produto-info p-4">
+      <h4 class="infoproduto fw-bold mb-1">{{ produto.nome }}</h4>
+      <p class="infoproduto mb-2">{{ produto.descricao }}</p>
+      <p class="infoproduto h5 fw-bold mb-3">
+        R$ {{ produto.preco * quantidade | number : "1.2-2" }}
+      </p>
+
+      <!-- Observações -->
+      <div class="mb-3">
+        <label class="obs form-label fw-medium">Observações:</label>
+        <textarea
+          rows="2"
+          class="form-control"
+          placeholder="Ex: Preciso de uma colher."
+        ></textarea>
+      </div>
+
+      <!-- Quantidade -->
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <span class="quantidade fw-medium">Quantidade:</span>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn rounded-circle" (click)="diminuirQuantidade()">
+            <i class="bi bi-dash"></i>
+          </button>
+          <span class="fw-bold">{{ quantidade }}</span>
+          <button
+            class="btn btn-outline-secondary rounded-circle"
+            (click)="aumentarQuantidade()"
+          >
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botão Adicionar -->
+      <div class="d-grid">
+        <button class="btn-adicionar fw-bold" (click)="adicionarAoCarrinho()">
+          Adicionar - R$ {{ produto.preco * quantidade | number : "1.2-2" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

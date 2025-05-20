@@ -1,0 +1,11 @@
+/* Estilos globais */
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-size: calc(100% + 0.4px);
+}
