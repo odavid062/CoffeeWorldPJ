@@ -23,7 +23,6 @@ export class CarrinhoService {
   }
 
   adicionarProduto(produto: Produto) {
-    console.log('Adicionando produto ao carrinho:', produto);
     const atual = this.carrinhoSubject.getValue();
     const index = atual.findIndex(item => item.produto.id === produto.id);
 
@@ -33,7 +32,6 @@ export class CarrinhoService {
       atual.push({ produto, quantidade: 1 });
     }
 
-    console.log('Carrinho atualizado:', atual);
     this.carrinhoSubject.next([...atual]);
     this.salvarCarrinho(atual);
   }

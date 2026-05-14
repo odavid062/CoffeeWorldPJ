@@ -2,6 +2,7 @@ package com.coffeworld.backend.service;
 
 import com.coffeworld.backend.dto.PedidoDTO;
 import com.coffeworld.backend.enums.StatusPedido;
+import com.coffeworld.backend.exception.ResourceNotFoundException;
 import com.coffeworld.backend.mapper.PedidoMapper;
 import com.coffeworld.backend.model.ItemPedido;
 import com.coffeworld.backend.model.Pedido;
@@ -40,7 +41,7 @@ public class PedidoService {
     public PedidoDTO buscarPorId(Long id) {
         return pedidoRepository.findById(id)
                 .map(pedidoMapper::toDTO)
-                .orElse(null);
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado com ID: " + id));
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -53,7 +54,7 @@ public class PedidoService {
 
         List<ItemPedido> itens = pedidoDTO.getItens().stream().map(itemDTO -> {
             Produto produto = produtoRepository.findById(itemDTO.getProdutoId())
-                    .orElseThrow(() -> new RuntimeException("Produto não encontrado com ID: " + itemDTO.getProdutoId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + itemDTO.getProdutoId()));
 
             ItemPedido item = new ItemPedido();
             item.setProduto(produto);
@@ -114,7 +115,7 @@ public class PedidoService {
     @Transactional(rollbackFor = Throwable.class)
     public PedidoDTO atualizarStatus(Long pedidoId, StatusPedido novoStatus) {
         Pedido pedido = pedidoRepository.findById(pedidoId)
-                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado com ID: " + pedidoId));
 
         pedido.setStatus(novoStatus);
         Pedido atualizado = pedidoRepository.save(pedido);

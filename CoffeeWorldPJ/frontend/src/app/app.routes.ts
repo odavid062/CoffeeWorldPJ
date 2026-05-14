@@ -7,11 +7,11 @@ import { DetalhesPedidoComponent } from './components/pedido/detalhes/detalhes.c
 import { CozinhaComponent } from './components/cozinha/cozinha.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/cardapio', pathMatch: 'full' },
-    { path: '/cardapio', component: CardapioComponent },
-    { path: '/produto/:id', component: ProdutoComponent },
-    { path: '/carrinho', component: CarrinhoComponent },
-    { path: '/pedido', component: PedidoComponent },
-    { path: '/pedido/:id', component: DetalhesPedidoComponent },
-    { path: '/cozinha', component: CozinhaComponent }
+    { path: '', redirectTo: 'cardapio', pathMatch: 'full' },
+    { path: 'cardapio', component: CardapioComponent },
+    { path: 'produto/:id', component: ProdutoComponent },
+    { path: 'carrinho', component: CarrinhoComponent },
+    { path: 'pedido', component: PedidoComponent },
+    { path: 'pedido/:id', component: DetalhesPedidoComponent },
+    { path: 'cozinha', component: CozinhaComponent }
   ];

@@ -11,6 +11,6 @@ RUN npm run build
 # Etapa de produção com nginx
 FROM nginx:alpine
 COPY --from=build /app/dist/spa-coffee-world/browser /usr/share/nginx/html
-
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

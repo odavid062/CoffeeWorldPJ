@@ -31,8 +31,7 @@ public class PedidoResource {
     @Operation(summary = "Buscar pedido por ID")
     @GetMapping("/{id}")
     public ResponseEntity<PedidoDTO> buscarPorId(@PathVariable(name = "id") Long id) {
-        PedidoDTO pedido = pedidoService.buscarPorId(id);
-        return pedido != null ? ResponseEntity.ok(pedido) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(pedidoService.buscarPorId(id));
     }
 
     @Operation(summary = "Filtrar pedidos por status")

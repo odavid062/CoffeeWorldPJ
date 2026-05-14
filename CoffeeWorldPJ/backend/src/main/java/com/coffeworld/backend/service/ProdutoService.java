@@ -1,6 +1,7 @@
 package com.coffeworld.backend.service;
 
 import com.coffeworld.backend.dto.ProdutoDTO;
+import com.coffeworld.backend.exception.ResourceNotFoundException;
 import com.coffeworld.backend.mapper.ProdutoMapper;
 import com.coffeworld.backend.model.Produto;
 import com.coffeworld.backend.repository.ProdutoRepository;
@@ -31,8 +32,9 @@ public class ProdutoService {
 
     @Transactional(readOnly = true)
     public ProdutoDTO buscarPorId(Long id) {
-        Optional<Produto> produto = produtoRepository.findById(id);
-        return produto.map(produtoMapper::toDTO).orElse(null);
+        return produtoRepository.findById(id)
+                .map(produtoMapper::toDTO)
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -44,13 +46,11 @@ public class ProdutoService {
 
     @Transactional(rollbackFor = Throwable.class)
     public ProdutoDTO atualizar(Long id, ProdutoDTO produtoDTO) {
-        Optional<Produto> produtoExistente = produtoRepository.findById(id);
-        if (produtoExistente.isPresent()) {
-            Produto produtoAtualizado = produtoMapper.toEntity(produtoDTO);
-            produtoAtualizado.setId(id);
-            return produtoMapper.toDTO(produtoRepository.save(produtoAtualizado));
-        }
-        return null;
+        produtoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
+        Produto produtoAtualizado = produtoMapper.toEntity(produtoDTO);
+        produtoAtualizado.setId(id);
+        return produtoMapper.toDTO(produtoRepository.save(produtoAtualizado));
     }
 
     @Transactional(rollbackFor = Throwable.class)

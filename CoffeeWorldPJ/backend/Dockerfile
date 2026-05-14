@@ -14,8 +14,8 @@ COPY . .
 # Executa o build (sem testes)
 RUN mvn clean package -DskipTests
 
-# Etapa final com JDK mais leve para rodar o app (Java 21)
-FROM eclipse-temurin:21-jdk-alpine
+# Etapa final com JRE mais leve para rodar o app (Java 21)
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copia o JAR gerado no build anterior
