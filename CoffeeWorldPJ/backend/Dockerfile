@@ -21,5 +21,8 @@ WORKDIR /app
 # Copia o JAR gerado no build anterior
 COPY --from=build /app/target/*.jar app.jar
 
-# Comando de inicialização do container
+# Porta exposta
+EXPOSE 8080
+
+# Perfil 'prod' ativado via variavel de ambiente SPRING_PROFILES_ACTIVE=prod no Railway
 ENTRYPOINT ["java", "-jar", "app.jar"]
