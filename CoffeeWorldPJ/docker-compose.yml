@@ -34,6 +34,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    environment:
+      # Localmente o nginx resolve o container pelo nome "backend"
+      BACKEND_URL: http://backend:8080
     depends_on:
       - backend
 
