@@ -18,19 +18,22 @@ public class DataInitializer implements CommandLineRunner {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${app.admin.email:david.tdb21@hotmail.com}")
+    // Sem fallbacks — valores vem de application.properties (dev)
+    // ou variaveis de ambiente (prod). Sem credenciais no codigo.
+
+    @Value("${app.admin.email}")
     private String adminEmail;
 
-    @Value("${app.admin.password:250797}")
+    @Value("${app.admin.password}")
     private String adminPassword;
 
-    @Value("${app.admin.name:David Rodrigues}")
+    @Value("${app.admin.name}")
     private String adminName;
 
-    @Value("${app.cozinha.email:cozinha@coffeeworld.com}")
+    @Value("${app.cozinha.email}")
     private String cozinhaEmail;
 
-    @Value("${app.cozinha.password:cozinha123}")
+    @Value("${app.cozinha.password}")
     private String cozinhaPassword;
 
     @Override
