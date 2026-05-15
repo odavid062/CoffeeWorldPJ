@@ -25,6 +25,7 @@ export class CardapioComponent implements OnInit {
   produtos: Produto[] = [];
   mensagemSucesso: string = '';
   termoPesquisa: string = '';
+  readonly anoAtual = new Date().getFullYear();
 
   usuario$: Observable<AuthResponse | null>;
 
