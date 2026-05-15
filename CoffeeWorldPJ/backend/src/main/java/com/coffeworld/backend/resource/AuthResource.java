@@ -3,6 +3,7 @@ package com.coffeworld.backend.resource;
 import com.coffeworld.backend.dto.auth.AuthResponseDTO;
 import com.coffeworld.backend.dto.auth.LoginRequestDTO;
 import com.coffeworld.backend.dto.auth.RegisterRequestDTO;
+import com.coffeworld.backend.exception.InvalidCredentialsException;
 import com.coffeworld.backend.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +33,7 @@ public class AuthResource {
         try {
             return ResponseEntity.ok(authService.login(dto));
         } catch (BadCredentialsException e) {
-            throw new IllegalArgumentException("E-mail ou senha incorretos");
+            throw new InvalidCredentialsException("E-mail ou senha incorretos");
         }
     }
 }

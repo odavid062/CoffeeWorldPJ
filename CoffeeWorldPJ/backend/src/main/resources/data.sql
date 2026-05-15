@@ -101,3 +101,6 @@ ON CONFLICT (id) DO NOTHING;
 INSERT INTO public.produto (id, descricao, imagem_url, nome, preco, tempo_preparo_minutos, categoria)
 VALUES(24, 'Sobremesa clássica com textura macia e calda de caramelo.', 'https://i.imgur.com/M8BwDrV.jpeg', 'Pudim de Leite Condensado', 15.90, 12, 'sobremesa')
 ON CONFLICT (id) DO NOTHING;
+
+-- Avanca a sequence para nao colidir com os IDs ja inseridos
+SELECT setval('produto_seq', GREATEST((SELECT MAX(id) FROM produto), 1));

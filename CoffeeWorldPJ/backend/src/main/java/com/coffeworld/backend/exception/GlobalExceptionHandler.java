@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.UNPROCESSABLE_ENTITY, erros);
     }
 
-    @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
+    @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class, InvalidCredentialsException.class})
     public ResponseEntity<Map<String, Object>> handleAuthFailure(Exception ex) {
         return buildResponse(HttpStatus.UNAUTHORIZED, "E-mail ou senha incorretos");
     }
