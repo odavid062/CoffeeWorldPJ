@@ -5,16 +5,30 @@ import { ProdutoService } from '../../services/produto.service';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { Produto } from '../../models/produto.model';
 
+interface Categoria {
+  id: string;
+  titulo: string;
+  key: string;
+}
+
 @Component({
   selector: 'app-cardapio',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './cardapio.component.html',
-  styleUrls: ['./cardapio.component.css'], // Corrigido: styleUrls em vez de styleUrl
+  styleUrls: ['./cardapio.component.css'],
 })
 export class CardapioComponent implements OnInit {
   produtos: Produto[] = [];
   mensagemSucesso: string = '';
+  termoPesquisa: string = '';
+
+  categorias: Categoria[] = [
+    { id: 'quentes',    titulo: 'Bebidas Quentes', key: 'bebida-quente' },
+    { id: 'geladas',    titulo: 'Bebidas Geladas', key: 'bebida-gelada' },
+    { id: 'lanches',    titulo: 'Lanches',         key: 'lanche'        },
+    { id: 'sobremesas', titulo: 'Sobremesas',      key: 'sobremesa'     },
+  ];
 
   constructor(
     private produtoService: ProdutoService,
@@ -27,34 +41,28 @@ export class CardapioComponent implements OnInit {
 
   carregarProdutos(): void {
     this.produtoService.listarProdutos().subscribe({
-      next: (produtos) => {
-        this.produtos = produtos;
-      },
-      error: (error) => {
-        console.error('Erro ao carregar produtos:', error);
-      },
+      next: (produtos) => (this.produtos = produtos),
+      error: (error) => console.error('Erro ao carregar produtos:', error),
     });
+  }
+
+  filtrar(event: Event): void {
+    this.termoPesquisa = (event.target as HTMLInputElement).value.toLowerCase();
+  }
+
+  produtosPorCategoria(key: string): Produto[] {
+    return this.produtos.filter(
+      (p) =>
+        p.categoria === key &&
+        (this.termoPesquisa === '' ||
+          p.nome.toLowerCase().includes(this.termoPesquisa) ||
+          p.descricao?.toLowerCase().includes(this.termoPesquisa))
+    );
   }
 
   adicionarAoCarrinho(produto: Produto): void {
     this.carrinhoService.adicionarProduto(produto);
     this.mensagemSucesso = `${produto.nome} adicionado ao carrinho!`;
     setTimeout(() => (this.mensagemSucesso = ''), 3000);
-  }
-
-  get bebidasQuentes(): Produto[] {
-    return this.produtos.filter((p) => p.categoria === 'bebida-quente');
-  }
-
-  get bebidasGeladas(): Produto[] {
-    return this.produtos.filter((p) => p.categoria === 'bebida-gelada');
-  }
-
-  get lanches(): Produto[] {
-    return this.produtos.filter((p) => p.categoria === 'lanche');
-  }
-
-  get sobremesas(): Produto[] {
-    return this.produtos.filter((p) => p.categoria === 'sobremesa');
   }
 }

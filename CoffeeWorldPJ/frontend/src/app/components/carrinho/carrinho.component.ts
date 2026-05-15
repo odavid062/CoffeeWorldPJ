@@ -43,10 +43,7 @@ export class CarrinhoComponent implements OnInit, OnDestroy {
   }
 
   diminuirQuantidade(item: ItemCarrinho): void {
-    if (item.quantidade > 1) {
-      item.quantidade--;
-      this.calcularTotal();
-    }
+    this.carrinhoService.diminuirQuantidade(item.produto.id);
   }
 
   removerItem(produtoId: number | undefined): void {

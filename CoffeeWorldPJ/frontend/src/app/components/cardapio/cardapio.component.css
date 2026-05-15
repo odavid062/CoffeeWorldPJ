@@ -115,23 +115,6 @@
   margin: -15px 0 !important;
 }
 
-.item-card {
-  background-color: #fff;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 30%;
-  margin-right: 10px;
-  text-align: center;
-}
-
-.item-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
 .btn {
   margin-top: 10px;
 }
@@ -148,7 +131,7 @@
 }
 
 .card-img-top {
-  height: 400px !important; /* Alterado para 800px */
+  height: 220px;
   object-fit: cover;
 }
 

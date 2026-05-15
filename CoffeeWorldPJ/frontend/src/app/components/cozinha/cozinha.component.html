@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of pedido.itens">
-                        <td>{{ produtos[item.produtoId].nome }}</td>
+                        <td>{{ produtos[item.produtoId]?.nome ?? '...' }}</td>
                         <td>{{ item.quantidade }}x</td>
                       </tr>
                     </tbody>
@@ -73,7 +73,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of pedido.itens">
-                        <td>{{ produtos[item.produtoId].nome }}</td>
+                        <td>{{ produtos[item.produtoId]?.nome ?? '...' }}</td>
                         <td>{{ item.quantidade }}x</td>
                       </tr>
                     </tbody>
@@ -117,7 +117,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of pedido.itens">
-                        <td>{{ produtos[item.produtoId].nome }}</td>
+                        <td>{{ produtos[item.produtoId]?.nome ?? '...' }}</td>
                         <td>{{ item.quantidade }}x</td>
                       </tr>
                     </tbody>

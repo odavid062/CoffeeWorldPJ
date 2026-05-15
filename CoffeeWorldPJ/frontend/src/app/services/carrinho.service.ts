@@ -41,6 +41,19 @@ export class CarrinhoService {
     this.salvarCarrinho([]);
   }
 
+  diminuirQuantidade(produtoId: number): void {
+    const atual = this.carrinhoSubject.getValue();
+    const index = atual.findIndex(item => item.produto.id === produtoId);
+    if (index === -1) return;
+
+    if (atual[index].quantidade > 1) {
+      atual[index].quantidade--;
+    }
+
+    this.carrinhoSubject.next([...atual]);
+    this.salvarCarrinho(atual);
+  }
+
   removerProduto(produtoId: number) {
     const atual = this.carrinhoSubject.getValue().filter(p => p.produto.id !== produtoId);
     this.carrinhoSubject.next([...atual]);
