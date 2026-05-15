@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProdutoService } from '../../services/produto.service';
 import { CarrinhoService } from '../../services/carrinho.service';
+import { AuthService } from '../../services/auth.service';
 import { Produto } from '../../models/produto.model';
+import { AuthResponse } from '../../models/auth.model';
+import { Observable } from 'rxjs';
 
 interface Categoria {
   id: string;
@@ -23,6 +26,8 @@ export class CardapioComponent implements OnInit {
   mensagemSucesso: string = '';
   termoPesquisa: string = '';
 
+  usuario$: Observable<AuthResponse | null>;
+
   categorias: Categoria[] = [
     { id: 'quentes',    titulo: 'Bebidas Quentes', key: 'bebida-quente' },
     { id: 'geladas',    titulo: 'Bebidas Geladas', key: 'bebida-gelada' },
@@ -32,8 +37,11 @@ export class CardapioComponent implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
-    private carrinhoService: CarrinhoService
-  ) {}
+    private carrinhoService: CarrinhoService,
+    public authService: AuthService,
+  ) {
+    this.usuario$ = this.authService.usuario$;
+  }
 
   ngOnInit(): void {
     this.carregarProdutos();
@@ -64,5 +72,9 @@ export class CardapioComponent implements OnInit {
     this.carrinhoService.adicionarProduto(produto);
     this.mensagemSucesso = `${produto.nome} adicionado ao carrinho!`;
     setTimeout(() => (this.mensagemSucesso = ''), 3000);
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

@@ -1,0 +1,48 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header">
+      <img src="assets/logo.png" alt="Coffee World" class="logo" />
+      <h2>{{ modo === 'login' ? 'Entrar' : 'Criar conta' }}</h2>
+    </div>
+
+    <form (ngSubmit)="enviar()" #f="ngForm">
+      <div class="mb-3" *ngIf="modo === 'registro'">
+        <label class="form-label">Nome completo</label>
+        <input type="text" class="form-control" name="nome"
+               [(ngModel)]="nome" required minlength="2" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-control" name="email"
+               [(ngModel)]="email" required email />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" name="senha"
+               [(ngModel)]="senha" required minlength="6" />
+      </div>
+
+      <div *ngIf="erro" class="alert alert-danger py-2">{{ erro }}</div>
+
+      <button type="submit" class="btn btn-primary w-100"
+              [disabled]="f.invalid || carregando">
+        <span *ngIf="!carregando">{{ modo === 'login' ? 'Entrar' : 'Cadastrar' }}</span>
+        <span *ngIf="carregando">Aguarde...</span>
+      </button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a (click)="alternarModo()" class="alternar-link">
+        {{ modo === 'login' ? 'Não tem conta? Cadastre-se' : 'Já tem conta? Entrar' }}
+      </a>
+    </div>
+
+    <div class="text-center mt-3">
+      <a routerLink="/cardapio" class="text-muted small">
+        <i class="bi bi-arrow-left me-1"></i>Voltar ao cardápio
+      </a>
+    </div>
+  </div>
+</div>

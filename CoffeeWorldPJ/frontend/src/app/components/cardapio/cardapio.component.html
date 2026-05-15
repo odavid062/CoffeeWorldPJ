@@ -5,9 +5,9 @@
       <a class="navbar-brand" href="#">
         <img src="../../../assets/logo.png" alt="Coffee World" />
       </a>
-      <form class="d-flex ms-auto" (submit)="$event.preventDefault()">
+      <form class="d-flex ms-auto align-items-center gap-2" (submit)="$event.preventDefault()">
         <input
-          class="form-control me-1"
+          class="form-control"
           type="search"
           placeholder="Pesquisar produto"
           aria-label="Pesquisar"
@@ -16,12 +16,28 @@
         <button class="pesquisar" type="button">
           <img src="assets/lupa.png" alt="lupa de pesquisa" />
         </button>
+
+        <!-- Cozinha — apenas para staff -->
         <button
+          *ngIf="authService.isCozinha()"
           class="btn btn-primary d-flex align-items-center"
           routerLink="/cozinha"
         >
           <i class="bi bi-cup-straw me-2"></i>Cozinha
         </button>
+
+        <!-- Login / Logout -->
+        <ng-container *ngIf="usuario$ | async as usuario; else botaoLogin">
+          <span class="text-white d-none d-md-inline me-2">Olá, {{ usuario.nome }}</span>
+          <button class="btn btn-outline-light" (click)="logout()" title="Sair">
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </ng-container>
+        <ng-template #botaoLogin>
+          <button class="btn btn-outline-light d-flex align-items-center" routerLink="/login">
+            <i class="bi bi-person-circle me-2"></i>Entrar
+          </button>
+        </ng-template>
       </form>
     </div>
   </nav>
