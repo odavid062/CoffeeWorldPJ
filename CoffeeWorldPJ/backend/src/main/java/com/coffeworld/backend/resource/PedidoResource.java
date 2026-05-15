@@ -6,6 +6,7 @@ import com.coffeworld.backend.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pedidos")
-@CrossOrigin(origins = "*")
 @Tag(name = "Pedidos", description = "Gerenciamento de pedidos da cafeteria")
 public class PedidoResource {
 
@@ -48,7 +48,7 @@ public class PedidoResource {
 
     @Operation(summary = "Criar novo pedido")
     @PostMapping
-    public ResponseEntity<PedidoDTO> salvar(@RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<PedidoDTO> salvar(@Valid @RequestBody PedidoDTO pedidoDTO) {
         return ResponseEntity.ok(pedidoService.salvar(pedidoDTO));
     }
 

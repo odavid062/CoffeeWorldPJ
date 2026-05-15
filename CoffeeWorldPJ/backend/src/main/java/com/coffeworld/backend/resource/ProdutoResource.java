@@ -5,6 +5,7 @@ import com.coffeworld.backend.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/produtos")
-@CrossOrigin(origins = "*")
 @Tag(name = "Produtos", description = "Gerenciamento dos produtos disponíveis no cardápio")
 public class ProdutoResource {
 
@@ -34,13 +34,13 @@ public class ProdutoResource {
 
     @Operation(summary = "Criar novo produto")
     @PostMapping
-    public ResponseEntity<ProdutoDTO> salvar(@RequestBody ProdutoDTO produtoDTO) {
+    public ResponseEntity<ProdutoDTO> salvar(@Valid @RequestBody ProdutoDTO produtoDTO) {
         return ResponseEntity.ok(produtoService.salvar(produtoDTO));
     }
 
     @Operation(summary = "Atualizar produto existente")
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoDTO> atualizar(@PathVariable(name = "id") Long id, @RequestBody ProdutoDTO produtoDTO) {
+    public ResponseEntity<ProdutoDTO> atualizar(@PathVariable(name = "id") Long id, @Valid @RequestBody ProdutoDTO produtoDTO) {
         return ResponseEntity.ok(produtoService.atualizar(id, produtoDTO));
     }
 
